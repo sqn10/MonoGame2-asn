@@ -9,6 +9,18 @@ namespace MonoGame2_asn
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
+        Rectangle window;
+
+        Texture2D circleTexture, rectangleTexture;
+
+        SpriteFont textFont;
+
+        Rectangle faceRect;
+        Rectangle MouthRect;
+        Rectangle hairRect;
+        Rectangle leftEyeRect;
+        Rectangle rightEyeRect;
+
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -20,12 +32,27 @@ namespace MonoGame2_asn
         {
             // TODO: Add your initialization logic here
 
+            this.Window.Title = "SQN";
+
+            window = new Rectangle(0, 0, 800, 600);
+            _graphics.PreferredBackBufferWidth = window.Width;
+            _graphics.PreferredBackBufferHeight = window.Height;
+            _graphics.ApplyChanges();
+
+            faceRect = new Rectangle((window.Width / 2) - 150, (window.Height /2 ) - 150, 300, 300);
+            // leftEyeRect;
+            // rightEyeRect;
+
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
+
+            circleTexture = Content.Load<Texture2D>("circle");
+            rectangleTexture = Content.Load<Texture2D>("rectangle");
+            textFont = Content.Load<SpriteFont>("textFont");
 
             // TODO: use this.Content to load your game content here
         }
@@ -42,9 +69,15 @@ namespace MonoGame2_asn
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.DarkRed);
 
             // TODO: Add your drawing code here
+
+            _spriteBatch.Begin();
+
+            _spriteBatch.Draw(circleTexture, faceRect, Color.PeachPuff);
+
+            _spriteBatch.End();
 
             base.Draw(gameTime);
         }
